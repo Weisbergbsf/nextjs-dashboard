@@ -119,6 +119,13 @@ export async function deleteInvoice(id: string) {
     revalidatePath(path);
 }
 
+export async function deleteCustomer(id: string) {
+
+    await sql`DELETE FROM customers WHERE id = ${id}`;
+
+    revalidatePath(path);
+}
+
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
@@ -126,7 +133,6 @@ export async function authenticate(
     try {
       await signIn('credentials', formData);
     } catch (error) {
-        console.log(`***************** ${JSON.stringify(error, null, '')}`)
       if (error instanceof AuthError) {
         switch (error.type) {
           case 'CredentialsSignin':

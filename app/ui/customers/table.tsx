@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/app/lib/data';
-import Pagination from '../pagination';
-import { DeleteUser, UpdateUser } from './buttons';
+import { deleteCustomer } from '@/app/lib/actions';
+import Pagination from '@/app/ui/pagination';
+import { UpdateCustomer } from '@/app/ui/customers/buttons';
+import CustomerActions from '@/app/ui/customers/customer-actions';
 
 export default async function CustomersTable({ query, currentPage }: {
   query: string;
@@ -53,8 +55,13 @@ export default async function CustomersTable({ query, currentPage }: {
                     <p>{customer.total_invoices} invoices</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateUser id={customer.id} />
-                    <DeleteUser id={customer.id} />
+                    <UpdateCustomer id={customer.id} />
+                    <CustomerActions
+                      id={customer.id}
+                      name={customer.name}
+                      deleteAction={deleteCustomer.bind(null, customer.id)}
+                    />
+                    {/* <DeleteUser id={customer.id} /> */}
                   </div>
                 </div>
               ))}
@@ -112,8 +119,13 @@ export default async function CustomersTable({ query, currentPage }: {
                     </td>
                     <td className="whitespace-nowrap bg-white py-3 pl-6 pr-3 group-first-of-type:rounded-md group-last-of-type:rounded-md">
                       <div className="flex justify-end gap-3">
-                        <UpdateUser id={customer.id} />
-                        <DeleteUser id={customer.id} />
+                        <UpdateCustomer id={customer.id} />
+                        <CustomerActions
+                          id={customer.id}
+                          name={customer.name}
+                          deleteAction={deleteCustomer.bind(null, customer.id)}
+                        />
+                        {/* <DeleteUser id={customer.id} /> */}
                       </div>
                     </td>
                   </tr>

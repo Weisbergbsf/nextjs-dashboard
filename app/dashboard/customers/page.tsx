@@ -4,6 +4,7 @@ import Table from "@/app/ui/customers/table";
 import { Metadata } from "next"
 import { Suspense } from "react";
 import { CustomersTableSkeleton } from "@/app/ui/skeletons";
+import { CreateCustomer } from "@/app/ui/customers/buttons";
 
 export const metadata: Metadata = {
   title: 'Customers',
@@ -23,6 +24,7 @@ export default async function Page(props: {
           </div>
           <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
             <Search placeholder="Search customer..." />
+            <CreateCustomer />
           </div>
            <Suspense key={query + currentPage}  fallback={<CustomersTableSkeleton/>}>
             <Table query={query} currentPage={currentPage} />
