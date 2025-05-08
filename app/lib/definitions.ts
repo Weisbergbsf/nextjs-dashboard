@@ -53,6 +53,7 @@ export type InvoicesTable = {
   date: string;
   amount: number;
   status: 'pending' | 'paid';
+  total_count: number;
 };
 
 export type CustomersTableType = {
@@ -62,7 +63,7 @@ export type CustomersTableType = {
   image_url: string;
   total_invoices: number;
   total_pending: number;
-  total_paid: number;
+  total_paid: number;total_count: number;
 };
 
 export type FormattedCustomersTable = {

@@ -3,6 +3,7 @@ import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
+import Pagination from '../pagination';
 
 export default async function InvoicesTable({
   query,
@@ -11,7 +12,7 @@ export default async function InvoicesTable({
   query: string;
   currentPage: number;
 }) {
-  const invoices = await fetchFilteredInvoices(query, currentPage);
+  const { invoices, totalPages } = await fetchFilteredInvoices(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">
@@ -118,6 +119,9 @@ export default async function InvoicesTable({
             </tbody>
           </table>
         </div>
+      </div>
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );
